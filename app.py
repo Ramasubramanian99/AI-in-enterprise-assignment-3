@@ -23,15 +23,14 @@ def insert_student():
     return jsonify(result)
 
 # Update the details of a particular student
-@app.route("/student", methods=["PUT"])
-def update_student():
+@app.route("/student/<id>", methods=["PUT"])
+def update_student(id):
     student_details = request.get_json()
-    id = student_details["id"]
     first_name = student_details["first_name"]    
     last_name = student_details["last_name"]
     amount_due = student_details["amount_due"]
     dob = student_details["dob"]
-    result = student_controller.update_student(first_name, last_name, amount_due, id, dob)
+    result = student_controller.update_student(first_name, last_name, amount_due, dob, id)
     return jsonify(result)
 
 # Delete the student details of one particular student

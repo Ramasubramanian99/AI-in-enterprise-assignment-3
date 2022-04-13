@@ -3,11 +3,14 @@ DATABASE_NAME = "students.db"
 
 
 def get_db():
+    #connect to the database instance and return it
     conn = sqlite3.connect(DATABASE_NAME)
     return conn
 
-
+# This function will get called everytime the app is initialized
 def create_tables():
+    # The SQL query below creates a table called students in the students.db file
+    # with the columns id, first_name, last_name, amount_due, dob
     tables = [
         """CREATE TABLE IF NOT EXISTS students(
                 id INTEGER PRIMARY KEY,
@@ -18,7 +21,11 @@ def create_tables():
             )
             """
     ]
+    # get the instance of the database and store it in db
     db = get_db()
+    # get the current state of the database
     cursor = db.cursor()
+    # loop through the tables and executes the SQL command in our case we have only one
+    # table therefore only one command
     for table in tables:
         cursor.execute(table)
